@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { SelectOption } from "./interfaces";
 import { Select } from "./Select";
 
 const optionsMock = [
@@ -9,7 +11,29 @@ const optionsMock = [
 ];
 
 function App() {
-  return <Select options={optionsMock} />;
+  const [multipleValue, setMultipleValue] = useState<SelectOption[]>([
+    optionsMock[0],
+  ]);
+  const [singularValue, setSungularValue] = useState<SelectOption | undefined>(
+    optionsMock[0]
+  );
+
+  return (
+    <>
+      <Select
+        multiple
+        options={optionsMock}
+        value={multipleValue}
+        onChange={(option) => setMultipleValue(option)}
+      />
+      <br />
+      <Select
+        options={optionsMock}
+        value={singularValue}
+        onChange={(option) => setSungularValue(option)}
+      />
+    </>
+  );
 }
 
 export default App;
